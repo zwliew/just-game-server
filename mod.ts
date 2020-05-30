@@ -1,14 +1,14 @@
 import { Application } from "https://deno.land/x/abc/mod.ts";
-import { DB } from "https://deno.land/x/sqlite/mod.ts";
+import { config } from "https://deno.land/x/dotenv/mod.ts";
 import { getRandomWord } from "./database/mod.ts";
 
-console.log('Starting Just Game server');
+console.log("Starting Just Game server");
 
-const db = new DB("server.db");
+const { PORT } = config();
 
 const app = new Application();
 app
   .get("/hangman/word", (c) => {
     return getRandomWord();
   })
-  .start({ port: 8080 });
+  .start({ port: +PORT });

@@ -12,7 +12,7 @@ function isData(val: unknown): val is Data {
 
 const db = new DB(DB_NAME);
 db.query(
-  "CREATE TABLE IF NOT EXISTS dictionary (id INTEGER PRIMARY KEY AUTOINCREMENT, word TEXT)"
+  "CREATE TABLE IF NOT EXISTS dictionary (id INTEGER PRIMARY KEY AUTOINCREMENT, word TEXT)",
 );
 
 const data = await readJson("./database/data.json");
