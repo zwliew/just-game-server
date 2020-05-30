@@ -10,14 +10,22 @@ console.log("Starting Just Game server");
 const { PORT } = config();
 
 const app = new Application();
+
+const root = app.group("/just-game");
+root.get("/", (c) => {
+  return "Hello! Welcome to Just Game's server :)";
+});
+
+const hangman = root.group("/hangman");
+hangman.get("/word", (c) => {
+  return getRandomWord();
+});
+
 app
   .use(logger())
   .use(
     cors({
       allowMethods: [HttpMethod.Get],
-    }),
+    })
   )
-  .get("/hangman/word", (c) => {
-    return getRandomWord();
-  })
   .start({ port: +PORT });
